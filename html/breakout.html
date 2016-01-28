@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Break Out (pure JavaScript Version)</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background: #eee;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="main_canvas" width="480" height="320"></canvas>
+
+<script>
+
+    // JavaScript Code goes here ...
+    var canvas = document.getElementById("main_canvas");
+    var context = canvas.getContext("2d");
+
+    // print a red square on the canvas
+    context.beginPath(); // begin drawing
+    context.rect(20, 40, 50, 50); // defines a rectangle top-left point is 20,40 width: 50 height: 50
+    context.fillStyle = "#FF0000"; // set the fill attribute to red
+    context.fill(); // fill the rectangle with the defined color
+    context.closePath(); // end drawing
+
+    // print a green circle
+    context.beginPath();
+    context.arc(240, 160, 20, 0, Math.PI*2, false); // x; 240, y: 160 (Arc-Center), arc-radius: 20,
+    // start and end angle 0 - 2*PI, drawing direction, false for clockwise, true for anti-clockwise
+    context.fillStyle = "green"; // css colours or rgba function or something else
+    context.fill();
+    context.closePath();
+
+    context.beginPath();
+    context.rect(160, 10, 100, 40);
+    context.strokeStyle = "rgba(0, 0, 255, 0.5)";
+    context.stroke();
+    context.closePath();
+</script>
+
+</body>
+</html>

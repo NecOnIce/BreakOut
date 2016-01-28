@@ -33,10 +33,12 @@
     var dx = 2;
     var dy = -2;
 
+    var ballRadius = 10;
+
     function drawBall() {
 
         context.beginPath();
-        context.arc(x, y, 10, 0, Math.PI*2);
+        context.arc(x, y, ballRadius, 0, Math.PI*2);
         context.fillStyle = "#0095DD";
         context.fill();
         context.closePath();
@@ -53,6 +55,16 @@
         // move the ball
         x += dx;
         y += dy;
+
+        var yTemp = y + dy;
+        if (yTemp < ballRadius || yTemp > canvas.height - ballRadius) {
+            dy = -dy;
+        }
+
+        var xTemp = x + dx;
+        if (xTemp < ballRadius || xTemp > canvas.width - ballRadius) {
+            dx = -dx;
+        }
     }
     setInterval(draw, 10);
 

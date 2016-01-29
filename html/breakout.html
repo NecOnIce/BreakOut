@@ -45,6 +45,38 @@
     var rightPressed = false;
     var leftPressed = false;
 
+    // Brick variables
+    var brickRawCount = 3;
+    var brickColumnCount = 5;
+    var brickWidth = 75;
+    var brickHeight = 20;
+    var brickPadding = 10;
+    var brickOffsetTop = 30;
+    var brickOffsetLeft = 30;
+
+    var bricks = [];
+    for (var c = 0; c < brickColumnCount; c++) {
+        bricks[c] = [];
+        for (var r = 0; r < brickRawCount; r++) {
+            var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+            var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+            bricks[c][r] = {x:brickX, y:brickY };
+        }
+    }
+
+    function drawBricks() {
+
+        for (var c = 0; c < brickColumnCount; c++) {
+            for (var r = 0; r < brickRawCount; r++) {
+
+                context.beginPath();
+                context.rect(bricks[c][r].x, bricks[c][r].y, brickWidth, brickHeight);
+                context.fillStyle = "#0095DD";
+                context.fill();
+                context.closePath();
+            }
+        }
+    }
 
     function drawBall() {
 
@@ -72,6 +104,7 @@
 
         drawBall();
         drawPaddle();
+        drawBricks();
 
         // move the ball
         x += dx;

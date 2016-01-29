@@ -33,12 +33,32 @@
     var dx = 2;
     var dy = -2;
 
+    // ball values
     var ballRadius = 10;
+
+    // paddle values
+    var paddleWidth = 75;
+    var paddleHeight = 10;
+    var paddleX  = (canvas.width-paddleWidth)/2;
+
+    // Button variables
+    var rightPressed = false;
+    var leftPressed = false;
+
 
     function drawBall() {
 
         context.beginPath();
         context.arc(x, y, ballRadius, 0, Math.PI*2);
+        context.fillStyle = "#0095DD";
+        context.fill();
+        context.closePath();
+    }
+
+    function drawPaddle() {
+
+        context.beginPath();
+        context.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
         context.fillStyle = "#0095DD";
         context.fill();
         context.closePath();
@@ -51,6 +71,7 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         drawBall();
+        drawPaddle();
 
         // move the ball
         x += dx;
@@ -65,7 +86,38 @@
         if (xTemp < ballRadius || xTemp > canvas.width - ballRadius) {
             dx = -dx;
         }
+
+        // check the keys and move the paddle
+        if (rightPressed && paddleX < canvas.width - paddleWidth) {
+            paddleX += 7;
+        } else if (leftPressed && paddleX > 0) {
+            paddleX -= 7;
+        }
     }
+
+    // add Eventlisterns
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    function keyDownHandler(event) {
+
+        if (event.keyCode == 39) {
+            rightPressed = true;
+        } else if (event.keyCode == 37) {
+            leftPressed = true;
+        }
+    }
+
+    function keyUpHandler(event) {
+
+        if (event.keyCode == 39) {
+            rightPressed = false;
+        } else if (event.keyCode == 37) {
+            leftPressed = false;
+        }
+    }
+
+    // start drawing loop
     setInterval(draw, 10);
 
 </script>

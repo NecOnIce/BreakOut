@@ -54,6 +54,7 @@
     var brickOffsetTop = 30;
     var brickOffsetLeft = 30;
 
+    // initialize the Bricks
     var bricks = [];
     for (var c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
@@ -62,6 +63,16 @@
             var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
             bricks[c][r] = {x: brickX, y: brickY, status: 1 };
         }
+    }
+
+    // the score
+    var score = 0;
+
+    function drawScore() {
+
+        context.font = "16px Arial";
+        context.fillStyle = "#0095DD";
+        context.fillText("Score: " + score, 8, 20);
     }
 
     function drawBricks() {
@@ -110,6 +121,7 @@
         drawBall();
         drawPaddle();
         drawBricks();
+        drawScore();
 
         // move the ball
         x += dx;
@@ -156,6 +168,11 @@
                 if (x > b.x && x < (b.x+brickWidth) && y > b.y && y < (b.y+brickHeight)) {
                     dy = -dy;
                     b.status = 0;
+                    score++;
+                    if (score == brickColumnCount*brickRawCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                    }
                 }
             }
         }

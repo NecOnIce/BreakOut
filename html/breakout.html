@@ -78,8 +78,15 @@
         y += dy;
 
         var yTemp = y + dy;
-        if (yTemp < ballRadius || yTemp > canvas.height - ballRadius) {
+        if (yTemp < ballRadius) {
             dy = -dy;
+        } else if (yTemp > canvas.height - ballRadius) {
+            if (x > paddleX && x < paddleX + paddleWidth) {
+                dy = -dy;
+            } else {
+                alert("Game Over");
+                document.location.reload();
+            }
         }
 
         var xTemp = x + dx;
